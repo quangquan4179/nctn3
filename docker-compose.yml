@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:8
+    container_name: nctn3
+    env_file: .env
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: ${DB_TIME_ZONE}
+    volumes:
+      - ./docker/db/data:/var/lib
+    ports:
+      - ${DB_PORT}:3306
